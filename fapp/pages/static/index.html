@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <title>Smart Chess DB</title>
+  <head>
+    <meta charset="UTF-8">
+    <title>Smart Chessbook</title>
+    <link rel="stylesheet" href="css/chessboard.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+  </head>
+  <body>
+    <h1>Chessbook</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <div style="display:flex; flex-wrap:wrap">
+      <div>
+        <div id="board" style="width: 400px"></div>
+        <p>Status: <span id="status"></span></p>
+        <p>FEN: <span id="fen"></span></p>
+        <p>PGN: <span id="pgn"></span></p>
+        <p>Polyglot Keys: <span id="plg"></span></p>
+      </div>
+      <div>
+        <table id="eval-tbl" class="brd">
+          <tr>
+            <td>Eval</td><td>Variation</td><td>Depth</td><td>Engine</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- normal script imports etc  -->
+    <script src="js/jquery.min.js"></script>    
+    <script src="js/chessboard.min.js"></script>
+    <script src="js/chess.min.js"></script> 
+    <script src="js/update_funcs.js"></script> 
+    <script src="js/my_board.js"></script>
+    
+    
+	
+  </body>
+</html>

@@ -1,0 +1,8 @@
+table.brd {
+    border-collapse: collapse;
+    border: solid 1px #111;
+}
+table.brd td {
+    border: solid 1px #111;
+    padding: 2px;
+}

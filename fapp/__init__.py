@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, send_from_directory
 
 
 def create_app(test_config=None):
@@ -24,9 +24,24 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
+    @app.route('/js/<path:path>')
+    def send_js(path):
+        return send_from_directory('js', path)
+    @app.route('/css/<path:path>')
+    def send_css(path):
+        return send_from_directory('css', path)
+
+    @app.route('/img/<path:path>')
+    def send_img(path):
+        return send_from_directory('img', path)
+
+    from .pages import index
+    app.register_blueprint(index.bp)
+
+    from .rest import eval
+    app.register_blueprint(eval.bp)
+
+    from . import db
+    db.init_app(app)
 
     return app

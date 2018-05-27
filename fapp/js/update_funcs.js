@@ -1,8 +1,8 @@
-var update_eval_table = function (fen){
+var update_eval_table = function (fen, move, fen_prev){
     $.ajax({
         url: "/rest/eval/read-table",
         type: "POST",
-        data: JSON.stringify({fen : fen}),
+        data: JSON.stringify({fen : fen, move: move, fen_prev: fen_prev}),
         contentType: 'application/json',
         dataType: "json",
         success: function(response){

@@ -35,6 +35,13 @@ def query_db(query, args=(), one=False):
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
+def insert_db(query, args =()):
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute(query, args)
+    conn.commit()
+    conn.close()
+
 
 @click.command('init-db')
 @with_appcontext

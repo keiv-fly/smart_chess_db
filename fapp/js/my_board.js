@@ -17,6 +17,7 @@ var onDragStart = function(source, piece, position, orientation) {
 };
 
 var onDrop = function(source, target) {
+  old_fen = game.fen();
   // see if the move is legal
   var move = game.move({
     from: source,
@@ -27,7 +28,7 @@ var onDrop = function(source, target) {
   // illegal move
   if (move === null) return 'snapback';
 
-  updateStatus();
+  updateStatus(old_fen = old_fen);
 };
 
 // update the board position after the piece snap 
@@ -36,7 +37,7 @@ var onSnapEnd = function() {
   board.position(game.fen());
 };
 
-var updateStatus = function() {
+var updateStatus = function(old_fen = null) {
   var status = '';
 
   var moveColor = 'White';
@@ -69,7 +70,18 @@ var updateStatus = function() {
   fen_db = game.fen();
   fen_db = fen_db.substring(0,fen_db.lastIndexOf(' '));
   fen_db = fen_db.substring(0,fen_db.lastIndexOf(' '));
-  update_eval_table(fen_db);
+  if (old_fen !== null){
+    old_fen = old_fen.substring(0,old_fen.lastIndexOf(' '));
+    old_fen = old_fen.substring(0,old_fen.lastIndexOf(' '));
+  }
+  var hist = game.history()
+  var last_move =""
+  if (hist.length > 0){
+    last_move = hist[hist.length - 1]
+  } else {
+    last_move = null
+  }
+  update_eval_table(fen_db,last_move,old_fen);
   pgnEl.html(game.pgn());
   plg_hash = polyglot_hash(game.fen())
   plgEl.html(plg_hash);
